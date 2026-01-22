@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Projects Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, #fff, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+        
+        .github-repo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            margin-top: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .github-repo-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .directory-container {
+            padding: 40px 30px;
+            min-height: 500px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title i {
+            color: #4f46e5;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
+            border-color: #c7d2fe;
+        }
+        
+        .project-header {
+            padding: 25px 25px 15px;
+            background: linear-gradient(90deg, #f8fafc, #f1f5f9);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .project-folder {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .folder-icon {
+            font-size: 2.5rem;
+            color: #4f46e5;
+        }
+        
+        .project-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.3;
+        }
+        
+        .project-description {
+            color: #64748b;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            padding-left: 60px;
+        }
+        
+        .project-body {
+            padding: 20px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        .btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #4338ca, #6d28d9);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+        
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .instructions {
+            background: linear-gradient(90deg, #f0f9ff, #e0f2fe);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+            border-left: 6px solid #0ea5e9;
+        }
+        
+        .instructions h3 {
+            color: #0369a1;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .instructions p {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ul {
+            color: #475569;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .footer-link {
+            color: #4f46e5;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: #7c3aed;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin-top: 10px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .directory-container {
+                padding: 25px 20px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .project-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e2e8f0;
+            border-radius: 50%;
+            border-top-color: #4f46e5;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #dc2626;
+            background: #fef2f2;
+            border-radius: 16px;
+            margin: 20px 0;
+            border-left: 6px solid #dc2626;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: #64748b;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 2px dashed #cbd5e1;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+        
+        .last-updated {
+            text-align: right;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-play-circle"></i> Animation Projects</h1>
+                <p class="subtitle">Khám phá bộ sưu tập các dự án animation đa dạng. Mỗi thư mục là một dự án độc lập với hiệu ứng và kỹ thuật animation khác nhau.</p>
+                <a href="https://github.com/trongle2206/animation" class="github-repo-link" target="_blank">
+                    <i class="fab fa-github"></i> Truy cập Repository chính
+                </a>
+            </div>
+        </header>
+        
+        <div class="directory-container">
+            <div class="section-title">
+                <i class="fas fa-folder-open"></i> Danh sách dự án
+            </div>
+            
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Đang tải danh sách dự án từ GitHub...</p>
+            </div>
+            
+            <div id="projectsContainer" class="projects-grid">
+                <!-- Dự án sẽ được tải động ở đây -->
+            </div>
+            
+            <div id="errorMessage" class="error" style="display: none;">
+                <h3><i class="fas fa-exclamation-triangle"></i> Không thể tải danh sách dự án</h3>
+                <p>Vui lòng kiểm tra kết nối mạng hoặc thử lại sau. Đang hiển thị danh sách dự án mẫu.</p>
+            </div>
+            
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Hướng dẫn sử dụng</h3>
+                <p>Mỗi dự án animation có 2 liên kết chính:</p>
+                <ul>
+                    <li><strong>Xem Demo</strong>: Mở trang GitHub Pages để xem animation trực tiếp</li>
+                    <li><strong>Xem Code</strong>: Mở trang GitHub để xem mã nguồn của dự án</li>
+                </ul>
+                <p>Đảm bảo rằng mỗi thư mục đã được cấu hình GitHub Pages riêng để "Xem Demo" hoạt động chính xác.</p>
+            </div>
+            
+            <div class="last-updated" id="lastUpdated">
+                <!-- Thời gian cập nhật sẽ được hiển thị ở đây -->
+            </div>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <p>Được tạo bởi Trọng Lê | Tự động hiển thị thư mục từ GitHub repository</p>
+                <p>GitHub Pages Hosting | Cập nhật tự động</p>
+                <div class="footer-links">
+                    <a href="https://github.com/trongle2206" class="footer-link" target="_blank">
+                        <i class="fab fa-github"></i> GitHub Profile
+                    </a>
+                    <a href="https://github.com/trongle2206/animation" class="footer-link" target="_blank">
+                        <i class="fas fa-code-branch"></i> Repository
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectsContainer = document.getElementById('projectsContainer');
+            const loadingElement = document.getElementById('loading');
+            const errorElement = document.getElementById('errorMessage');
+            const lastUpdatedElement = document.getElementById('lastUpdated');
+            
+            // URL của GitHub API để lấy nội dung repository
+            const repoUrl = 'https://api.github.com/repos/trongle2206/animation/contents';
+            
+            // Lấy danh sách thư mục từ GitHub API
+            fetch(repoUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Không thể tải dữ liệu từ GitHub API');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Ẩn loading
+                    loadingElement.style.display = 'none';
+                    
+                    // Lọc chỉ lấy thư mục (type === 'dir')
+                    const folders = data.filter(item => item.type === 'dir');
+                    
+                    // Sắp xếp theo tên
+                    folders.sort((a, b) => a.name.localeCompare(b.name));
+                    
+                    if (folders.length === 0) {
+                        projectsContainer.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fas fa-folder-open"></i>
+                                <h3>Không tìm thấy dự án nào</h3>
+                                <p>Repository không có thư mục nào hoặc đang trống.</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    // Hiển thị danh sách dự án
+                    displayProjects(folders);
+                    
+                    // Cập nhật thời gian
+                    const now = new Date();
+                    lastUpdatedElement.textContent = `Cập nhật lần cuối: ${now.toLocaleDateString('vi-VN')} ${now.toLocaleTimeString('vi-VN')}`;
+                })
+                .catch(error => {
+                    console.error('Lỗi:', error);
+                    loadingElement.style.display = 'none';
+                    errorElement.style.display = 'block';
+                    
+                    // Hiển thị danh sách dự án mẫu nếu API thất bại
+                    displayFallbackProjects();
+                    
+                    // Cập nhật thời gian
+                    const now = new Date();
+                    lastUpdatedElement.textContent = `Cập nhật lần cuối: ${now.toLocaleDateString('vi-VN')} ${now.toLocaleTimeString('vi-VN')} (Dữ liệu mẫu)`;
+                });
+                
+            function displayProjects(folders) {
+                projectsContainer.innerHTML = '';
+                
+                folders.forEach(folder => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'project-card';
+                    
+                    // Tạo URL GitHub Pages cho thư mục
+                    const ghPagesUrl = `https://trongle2206.github.io/animation/${folder.name}/`;
+                    
+                    // Tạo URL GitHub cho thư mục
+                    const githubFolderUrl = `https://github.com/trongle2206/animation/tree/main/${folder.name}`;
+                    
+                    // Lấy thông tin chi tiết cho thư mục
+                    const projectInfo = getProjectInfo(folder.name);
+                    
+                    projectCard.innerHTML = `
+                        <div class="project-header">
+                            <div class="project-folder">
+                                <div class="folder-icon">
+                                    <i class="fas fa-folder"></i>
+                                </div>
+                                <div class="project-name">${formatProjectName(folder.name)}</div>
+                            </div>
+                            <div class="project-description">${projectInfo.description}</div>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tech">
+                                ${projectInfo.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                            </div>
+                            <div class="project-actions">
+                                <a href="${ghPagesUrl}" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-play-circle"></i> Xem Demo
+                                </a>
+                                <a href="${githubFolderUrl}" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-code"></i> Xem Code
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    projectsContainer.appendChild(projectCard);
+                });
+            }
+            
+            function formatProjectName(folderName) {
+                // Chuyển đổi tên thư mục thành định dạng dễ đọc
+                return folderName
+                    .split('-')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+            }
+            
+            function getProjectInfo(folderName) {
+                // Thông tin chi tiết cho từng loại dự án
+                const projectDatabase = {
+                    '3d-animation': {
+                        description: 'Dự án animation 3D sử dụng Three.js, WebGL với hiệu ứng chuyển động mượt mà',
+                        tech: ['Three.js', 'WebGL', '3D']
+                    },
+                    'canvas-animation': {
+                        description: 'Animation sử dụng HTML5 Canvas với hiệu ứng vẽ và chuyển động phức tạp',
+                        tech: ['HTML5 Canvas', 'JavaScript']
+                    },
+                    'css-animation': {
+                        description: 'Animation thuần CSS sử dụng keyframes, transitions và transforms',
+                        tech: ['CSS3', 'Keyframes', 'Transitions']
+                    },
+                    'svg-animation': {
+                        description: 'Animation với SVG và SMIL, tạo hiệu ứng cho đồ họa vector',
+                        tech: ['SVG', 'SMIL', 'Vector']
+                    },
+                    'gsap-animation': {
+                        description: 'Animation sử dụng thư viện GSAP (GreenSock) chuyên nghiệp',
+                        tech: ['GSAP', 'JavaScript', 'Timeline']
+                    },
+                    'scroll-animation': {
+                        description: 'Animation được kích hoạt và điều khiển bằng sự kiện scroll',
+                        tech: ['Scroll Events', 'Intersection Observer']
+                    },
+                    'interactive-animation': {
+                        description: 'Animation tương tác với người dùng qua chuột, bàn phím hoặc cảm ứng',
+                        tech: ['Interactive', 'Event Listeners']
+                    },
+                    'loading-animation': {
+                        description: 'Hiệu ứng loading, spinner và các animation cho trạng thái tải',
+                        tech: ['Loading', 'Spinner', 'Progress']
+                    },
+                    'button-animation': {
+                        description: 'Hiệu ứng animation cho nút bấm với hover, click và các trạng thái',
+                        tech: ['Buttons', 'Hover Effects', 'UI']
+                    },
+                    'text-animation': {
+                        description: 'Hiệu ứng chữ, typography với animation sáng tạo',
+                        tech: ['Typography', 'Text Effects']
+                    }
+                };
+                
+                // Trả về thông tin dự án hoặc mặc định
+                return projectDatabase[folderName] || {
+                    description: 'Dự án animation đặc biệt với các hiệu ứng độc đáo',
+                    tech: ['Animation', 'Creative']
+                };
+            }
+            
+            function displayFallbackProjects() {
+                // Danh sách dự án mẫu nếu không thể lấy từ API
+                const fallbackProjects = [
+                    { name: '3d-animation' },
+                    { name: 'canvas-animation' },
+                    { name: 'css-animation' },
+                    { name: 'svg-animation' },
+                    { name: 'gsap-animation' },
+                    { name: 'scroll-animation' },
+                    { name: 'interactive-animation' },
+                    { name: 'loading-animation' },
+                    { name: 'button-animation' },
+                    { name: 'text-animation' }
+                ];
+                
+                displayProjects(fallbackProjects);
+            }
+            
+            // Thêm hiệu ứng cho các nút khi hover
+            document.addEventListener('mouseover', function(e) {
+                if (e.target.closest('.project-card')) {
+                    const card = e.target.closest('.project-card');
+                    const otherCards = document.querySelectorAll('.project-card:not(:hover)');
+                    
+                    otherCards.forEach(otherCard => {
+                        otherCard.style.opacity = '0.8';
+                        otherCard.style.transform = 'scale(0.98)';
+                    });
+                }
+            }, true);
+            
+            document.addEventListener('mouseout', function(e) {
+                if (e.target.closest('.project-card')) {
+                    const cards = document.querySelectorAll('.project-card');
+                    cards.forEach(card => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    });
+                }
+            }, true);
+        });
+    </script>
+</body>
+</html>
