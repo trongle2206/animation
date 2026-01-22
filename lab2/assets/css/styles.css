@@ -1,0 +1,161 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f8;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+section.card {
+    background: linear-gradient(180deg, #ffffff, #f7f9fc);
+    padding: 25px;
+    margin-bottom: 40px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.center {
+    text-align: center;
+}
+
+/* =====================
+   BÀI 1: MARQUEE
+===================== */
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    background: #eef3ff;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+.marquee p {
+    display: inline-block;
+    font-weight: 600;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(-100%); }
+}
+
+/* =====================
+   BÀI 2: SPIN BOX
+===================== */
+.spin-wrapper {
+    perspective: 800px;
+}
+
+.spin-box {
+    width: 120px;
+    height: 120px;
+    margin: 30px auto;
+
+    background: linear-gradient(135deg, #5f85ff, #00ffcc);
+    border-radius: 18px;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+
+    animation: rotateBox 3s linear infinite;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.spin-box:hover {
+    animation-play-state: paused;
+    transform: rotateY(20deg) scale(1.08);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.4);
+}
+
+@keyframes rotateBox {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.note {
+    font-size: 14px;
+    color: #666;
+}
+
+/* =====================
+   BÀI 3: FADE IN
+===================== */
+.fade-container {
+    display: flex;
+    gap: 20px;
+}
+
+.fade-container img {
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeIn 2s ease forwards;
+}
+
+.fade-container img:nth-child(1) { animation-delay: 0s; }
+.fade-container img:nth-child(2) { animation-delay: 0.5s; }
+.fade-container img:nth-child(3) { animation-delay: 1s; }
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =====================
+   BÀI 4: CTA
+===================== */
+.cta {
+    padding: 14px 36px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    from {
+        background: #ff3c3c;
+        transform: scale(1);
+    }
+    to {
+        background: #ff9f1a;
+        transform: scale(1.08);
+    }
+}
+
+/* =====================
+   BÀI 5: SLIDER
+===================== */
+.slider {
+    width: 300px;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.slides {
+    display: flex;
+    animation: slide 15s infinite;
+}
+
+.slides img {
+    width: 300px;
+}
+
+@keyframes slide {
+    0%   { transform: translateX(0); }
+    33%  { transform: translateX(-100%); }
+    66%  { transform: translateX(-200%); }
+    100% { transform: translateX(0); }
+}

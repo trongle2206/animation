@@ -1,0 +1,189 @@
+/* ================= BIẾN MÀU ================= */
+:root {
+    --bg: #0f172a;
+    --text: #e5e7eb;
+    --accent: #3b82f6;
+}
+
+body.light {
+    --bg: #ffffff;
+    --text: #0f172a;
+}
+
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    box-sizing: border-box;
+    cursor: none !important;
+}
+
+/* ================= BODY ================= */
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui;
+}
+
+/* ================= HEADER ================= */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 10;
+}
+
+nav a {
+    color: var(--text);
+    margin-left: 24px;
+    text-decoration: none;
+    opacity: 0.5;
+    transition: color 0.2s, opacity 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* ================= PROGRESS ================= */
+.progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--accent);
+}
+
+/* ================= SECTION ================= */
+.panel {
+    min-height: 100vh;
+    padding: 160px 16%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.panel h1 {
+    font-size: clamp(36px, 4vw, 56px);
+}
+
+.panel p {
+    max-width: 560px;
+    opacity: 0.85;
+}
+
+/* ================= BUTTON ================= */
+button {
+    padding: 14px 32px;
+    border-radius: 999px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    transition: transform 0.15s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* ================= STACK ================= */
+.stack {
+    display: flex;
+    gap: 24px;
+}
+
+/* ================= ITEM ================= */
+.item {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.06);
+    display: grid;
+    place-items: center;
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow: hidden;
+}
+
+.item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.item img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+/* ================= JUMP ================= */
+.jump:hover {
+    animation: jump 0.6s ease;
+}
+
+@keyframes jump {
+    50% { transform: translateY(-10px); }
+}
+
+/* ================= CURSOR (FAST) ================= */
+.cursor {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    /* KHÔNG delay di chuyển */
+    transition:
+        width 0.12s ease,
+        height 0.12s ease,
+        border 0.12s ease;
+
+    will-change: transform;
+}
+
+.cursor.hover-btn {
+    width: 26px;
+    height: 26px;
+    background: transparent;
+    border: 2px solid var(--accent);
+}
+
+/* ================= SCROLLBAR ================= */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 999px;
+}
+
+/* ================= TEXT ================= */
+.highlight {
+    color: var(--accent);
+}
+
+p {
+    line-height: 1.7;
+}
